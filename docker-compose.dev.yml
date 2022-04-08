@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server/src:/usr/src/app/src
+      - ./server/migrations:/usr/src/app/migrations
+      - ./logs/server_logs:/var/log/server_logs
+    expose:
+      - 5000
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env.dev
+    depends_on:
+      - db
+    entrypoint: ./entrypoint.sh
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./logs/db_logs:/var/log/postgresql
+    env_file:
+      - .env.dev
+
+volumes:
+  postgres_data:

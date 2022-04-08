@@ -1,0 +1,11 @@
+__pycache__
+.pytest_cache/
+.env*
+.history
+.hypothesis/
+build/
+reports/
+logs/
+.venv/
+venv/
+.vscode

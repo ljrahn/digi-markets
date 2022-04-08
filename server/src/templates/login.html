@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block
+  content%}
+    <div class="card mx-auto mt-5 pt-5 pb-3 px-3" style="width: 30rem;">
+      <div class="card-title">
+        <h3 class="fs-1 text-center mt-4">Admin Login</h1>
+      </div>
+      <div class="card-body p-4">
+        <form method="POST", action="{{ url_for('auth.login', next=request.args.get('next')) }}">
+          {{ form.csrf_token() }}
+          {{ wtf.form_field(form.username, class="form-control") }}
+          {{ wtf.form_field(form.password, class="form-control") }}
+          <button type="submit" class="btn btn-primary py-2 px-4 my-4 fs-4">Login</button>
+        </form>
+      </div>
+    </div>
+
+
+  
+  {% endblock %}
+  
