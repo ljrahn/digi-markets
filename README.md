@@ -5,6 +5,12 @@ docker compose -f docker-compose.dev.yml build
 docker compose -f docker-compose.dev.yml up
 ```
 
+## `Backup database`
+
+```
+docker exec <container-id> pg_dump -Fc <db-name> -U <db-user> > db.dump
+```
+
 # `Models`
 
 ## `table NFTContract`

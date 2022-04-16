@@ -1,11 +1,19 @@
-__pycache__
-.pytest_cache/
-.env*
-.history
-.hypothesis/
+# misc
+.vscode
 build/
 reports/
 logs/
+.history
+.hypothesis/
+.DS_Store
+.env*
+
+# python
 .venv/
 venv/
-.vscode
+__pycache__
+.pytest_cache/
+
+# nginx
+*.crt
+*.key

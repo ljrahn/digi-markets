@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Ethereum Mainnet",
+    "short_name": "eth",
+    "chain_id": 1,
+    "network_id": 1,
+    "supported": true,
+    "currency": "ETH",
+    "block_explorer": "https://etherscan.io"
+  },
+  {
+    "name": "Ropsten Testnet",
+    "short_name": "ropsten",
+    "chain_id": 3,
+    "network_id": 3,
+    "supported": true,
+    "currency": "ETH",
+    "block_explorer": "https://ropsten.etherscan.io"
+  },
+  {
+    "name": "Rinkeby Testnet",
+    "short_name": "rinkeby",
+    "chain_id": 4,
+    "network_id": 4,
+    "supported": true,
+    "currency": "ETH",
+    "block_explorer": "https://rinkeby.etherscan.io"
+  },
+  {
+    "name": "Kovan Testnet",
+    "short_name": "kovan",
+    "chain_id": 42,
+    "network_id": 42,
+    "supported": true,
+    "currency": "ETH",
+    "block_explorer": "https://kovan.infura.io/v3/"
+  },
+  {
+    "name": "Goerli Testnet",
+    "short_name": "goerli",
+    "chain_id": 5,
+    "network_id": 5,
+    "supported": true,
+    "currency": "ETH",
+    "block_explorer": "https://goerli.etherscan.io"
+  },
+  {
+    "name": "Mumbai Testnet",
+    "short_name": "mumbai",
+    "chain_id": 80001,
+    "network_id": 80001,
+    "supported": true,
+    "currency": "MATIC",
+    "block_explorer": "https://mumbai.polygonscan.com"
+  },
+  {
+    "name": "Polygon Mainnet",
+    "short_name": "polygon",
+    "chain_id": 137,
+    "network_id": 137,
+    "supported": true,
+    "currency": "MATIC",
+    "block_explorer": "https://polygonscan.com"
+  }
+]

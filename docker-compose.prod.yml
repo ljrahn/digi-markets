@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: ./services/server
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/server/src:/usr/src/app/src
+      - ./services/server/migrations:/usr/src/app/migrations
+      - ./logs/server_logs:/var/log/server_logs
+    env_file:
+      - .env.dev
+    depends_on:
+      - db
+    entrypoint: ./entrypoint.sh
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./logs/db_logs:/var/log/postgresql
+    env_file:
+      - .env.dev
+  nextjs:
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+      - nextjs
+
+volumes:
+  postgres_data:
