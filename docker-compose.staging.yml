@@ -29,9 +29,7 @@ services:
       dockerfile: Dockerfile
       args:
         staging: 1
-    entrypoint: pm2-runtime 'npm start' --error /var/log/nextjs_logs/nextjs_error.log --output /var/log/nextjs_logs/nextjs_output.log
-    volumes:
-      - ./logs/nextjs_logs:/var/log/nextjs_logs
+    entrypoint: pm2-runtime 'npm start'
   nginx:
     build:
       context: ./services/nginx

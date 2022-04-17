@@ -28,8 +28,6 @@ services:
       context: ./services/client
       dockerfile: Dockerfile
     entrypoint: pm2-runtime 'npm start'
-    volumes:
-      - ./logs/nextjs_logs:/var/log/nextjs_logs
   nginx:
     build:
       context: ./services/nginx
