@@ -42,7 +42,7 @@ const SearchCollection = ({ rotate = false }) => {
     if (e.key === "Enter") {
       if (text.startsWith("0x")) {
         router.push({
-          pathname: `/nft/${text}`,
+          pathname: `/nft/contract/${text}`,
           query: { page: 1 },
         });
         setInputBlank();
