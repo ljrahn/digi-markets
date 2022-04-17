@@ -19,8 +19,6 @@ __pycache__
 *.crt
 *.csr
 *.key
-Dockerfile.prod
-prod.conf
 
 # Docker
 docker-compose*
