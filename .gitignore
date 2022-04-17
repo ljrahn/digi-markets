@@ -17,4 +17,11 @@ __pycache__
 
 # nginx
 *.crt
+*.csr
 *.key
+Dockerfile.prod
+prod.conf
+
+# Docker
+docker-compose*
+!docker-compose.dev.yml
