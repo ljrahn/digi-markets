@@ -29,7 +29,7 @@ services:
   nginx:
     image: lucasrahn09/digimarkets_nginx:latest
     volumes:
-      - ./data/nginx_logs:/var/log/nginx
+      - ./logs/nginx_logs:/var/log/nginx
     ports:
       - "80:80"
       - "443:443"

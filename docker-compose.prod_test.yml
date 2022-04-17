@@ -35,7 +35,7 @@ services:
       context: ./services/nginx
       dockerfile: Dockerfile.prod
     volumes:
-      - ./data/nginx_logs:/var/log/nginx
+      - ./logs/nginx_logs:/var/log/nginx
     ports:
       - "80:80"
       - "443:443"
