@@ -6,6 +6,7 @@ logs/
 .history
 .hypothesis/
 .DS_Store
+README.prod.md
 .env*
 !.env.example
 
@@ -22,7 +23,3 @@ __pycache__
 *.crt
 *.csr
 *.key
-
-# Docker
-docker-compose*
-!docker-compose.dev.yml

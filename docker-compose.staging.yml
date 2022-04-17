@@ -23,6 +23,23 @@ services:
       - ./logs/db_logs:/var/log/postgresql
     env_file:
       - .env.dev
+  nextjs:
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+      args:
+        staging:
+    entrypoint: npm run start:staging
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - server
+      - nextjs
 
 volumes:
   postgres_data:

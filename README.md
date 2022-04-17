@@ -1,11 +1,60 @@
-# `Run Development Server`
+# `Running the Application`
+
+Docker is required in order to run the application. Follow https://docs.docker.com/engine/install/#server for details on how to install the docker engine and https://docs.docker.com/compose/install/ for details on how to install docker compose.
+
+## `Env Variables`
+
+- Before running the application in development, staging, or production, environment variables will need to be set. For a development, or staging build, set the name of your env file to `.env.dev`, and for production build set the name of your env file to `.env.prod`.
+- Since the application is built off of moralis you will need to head over to https://moralis.io/ sign up for free, and request a web3 api key, then set `MORALIS_API_KEY` in the env file.
+- For the server env variables, set `SERVER_URL`, and the `SECRET_KEY`. `SECRET_KEY` can be anything, just make it hard to guess. `SERVER_ADMIN_USER`
+  and `SERVER_ADMIN_PASSWORD`, are the credentials that will be used to access the admin page for database details and modification. This can be accessed at http://localhost:5000/api/admin for dev and http://localhost/api/admin for staging.
+- Set the database env variables `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` to what you wish.
+- `CLIENT_URL` is important for production to set the CORS policy in the backend, but for dev, or staging, it is not important
+
+## `Run Development Application`
+
+Running in development is good for changing application code without having to restart the development server. This will not use nginx as a reverse proxy service. You will view the application at http://localhost:3000
+
+### Start nextjs application
+
+start the nextjs development server:
 
 ```
-docker compose -f docker-compose.dev.yml build
-docker compose -f docker-compose.dev.yml up
+cd services/client
+npm run dev
 ```
+
+### Start python flask server
+
+In another terminal window start the flask server:
+
+```
+docker-compose -f docker-compose.dev.yml up --build
+```
+
+## `Run Staging Application`
+
+This is the closest to a production build of the app. It will use nginx as a reverse proxy and the application can be viewed at http://localhost
+
+```
+docker-compose -f docker-compose.staging.yml up --build
+```
+
+## `Run Production Application`
+
+In order to run the application in production there will need to be a little leg word done on your behalf, and probably some knowledge about deploying to production in general.
+
+- Put ssl certs `your_domain.crt` and `your_domain.key` in `/services/nginx/certs` directory
+- In the server blocks of `/services/nginx/prod.conf` set `server_name` to your domain name
+- In `/services/nginx/Dockerfile.prod` set the `COPY` statements to reference your SSL certs
+- In `/services/client/.env.production` change `NEXT_PUBLIC_SERVER_BASE_URL` to suit your domain.
+- In the `.env.prod` file make sure `ENVIRONMENT=prod` and set your `CLIENT_URL` and `SERVER_URL` to your domain name accordingly
+- For `docker-compose.prod.yml` you will need to change it based on what best fits your needs. Personally, I use private dockerhub repositories and push my images to the private repos, then when I run `docker-compose -f docker-compose.prod.yml up --pull` the images are pulled from the dockerhub repos.
+- There are many ways of running a production build, and you may need to do what works best for you, which will require modification of `docker-compose.prod.yml` and other files.
 
 ## `Backup database`
+
+If for some reason the database needs to be backed up:
 
 ```
 docker exec <container-id> pg_dump -Fc <db-name> -U <db-user> > db.dump
@@ -36,7 +85,7 @@ supported : Boolean # whether or not the chain is supported
 currency : String # (Possible: ETH, MATIC)
 ```
 
-# `Server`
+# `Server Resources`
 
 ## `/api/network`
 
@@ -299,7 +348,9 @@ returns: [
 
 # `Client`
 
-## `Hooks`
+## `Web3 Hooks`
+
+All hooks use SWR, mostly for caching, but some are used to ensure data is always fresh
 
 ### `useNetwork ()`
 
@@ -315,6 +366,10 @@ RETURNS {network}
 account = web3.getAccounts()[0]
 RETURNS {account}
 ```
+
+## `Server Hooks`
+
+### `useNetworkData (text, filter="name")`
 
 ### `useContractSearch (text, filter="name")`
 

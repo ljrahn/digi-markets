@@ -1,4 +1,4 @@
-FROM node
+FROM node:14
 
 # create & set working directory
 RUN mkdir -p /usr/src/app
@@ -14,14 +14,12 @@ RUN npm install
 # Copy all other files
 COPY . .
 
-# Build the static files
-RUN npm run build
+# npm run build OR npm run build:staging IF staging build arg specified
+ARG staging
+RUN if [ -z "$staging" ] ; then npm run build ; else npm run build:staging ; fi
 
 # Expose port 3000
 EXPOSE 3000
 
 # The node user is provided in the node image
 USER node
-
-# start app
-CMD [ "pm2-runtime", "npm", "--", "start" ]
