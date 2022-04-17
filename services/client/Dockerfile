@@ -16,7 +16,7 @@ COPY . .
 
 # npm run build OR npm run build:staging IF staging build arg specified
 ARG staging
-RUN if [ -z "$staging" ] ; then npm run build ; else npm run build:staging ; fi
+RUN if [ -n "$staging" ] ; then npm run build:staging ; else npm run build ; fi
 
 # Expose port 3000
 EXPOSE 3000

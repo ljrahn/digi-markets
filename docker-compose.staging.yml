@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
   server:
@@ -28,12 +28,16 @@ services:
       context: ./services/client
       dockerfile: Dockerfile
       args:
-        staging:
-    entrypoint: npm run start:staging
+        staging: 1
+    entrypoint: pm2-runtime 'npm start' --error ./logs/nextjs_error.log --output ./logs/nextjs_output.log
+    volumes:
+      - ./logs/nextjs_logs:/usr/src/app/logs
   nginx:
     build:
       context: ./services/nginx
       dockerfile: Dockerfile.dev
+    volumes:
+      - ./data/nginx_logs:/var/log/nginx
     ports:
       - "443:443"
       - "80:80"

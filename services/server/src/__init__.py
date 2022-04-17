@@ -56,7 +56,11 @@ def create_app():
     ma.init_app(app)
     migrate.init_app(app, db)
     socketio.init_app(app, cors_allowed_origins='*')
-    cors.init_app(app)
+    if app.config['ENV'] == 'production':
+        cors.init_app(app, resources={
+            r"/api/*": {"origins": "https://digimarkets.lujr.ca"}})
+    else:
+        cors.init_app(app)
     bootstrap.init_app(app)
     csrf.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView(

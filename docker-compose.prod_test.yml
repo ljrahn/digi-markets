@@ -10,7 +10,7 @@ services:
       - ./services/server/migrations:/usr/src/app/migrations
       - ./logs/server_logs:/var/log/server_logs
     env_file:
-      - .env.dev
+      - .env.prod
     depends_on:
       - db
     entrypoint: ./entrypoint.sh
@@ -22,7 +22,26 @@ services:
       - postgres_data:/var/lib/postgresql/data/
       - ./logs/db_logs:/var/log/postgresql
     env_file:
-      - .env.dev
+      - .env.prod
+  nextjs:
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+    entrypoint: pm2-runtime 'npm start' --error ./logs/nextjs_error.log --output ./logs/nextjs_output.log
+    volumes:
+      - ./logs/nextjs_logs:/usr/src/app/logs
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./data/nginx_logs:/var/log/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - server
+      - nextjs
 
 volumes:
   postgres_data:

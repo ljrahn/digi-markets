@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
   server:
@@ -23,9 +23,13 @@ services:
       - .env.prod
   nextjs:
     image: lucasrahn09/digimarkets_client:latest
-    entrypoint: pm2-runtime 'npm start'
+    entrypoint: pm2-runtime 'npm start' --error ./logs/nextjs_error.log --output ./logs/nextjs_output.log
+    volumes:
+      - ./logs/nextjs_logs:/usr/src/app/logs
   nginx:
     image: lucasrahn09/digimarkets_nginx:latest
+    volumes:
+      - ./data/nginx_logs:/var/log/nginx
     ports:
       - "80:80"
       - "443:443"
