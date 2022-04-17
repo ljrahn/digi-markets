@@ -18,6 +18,10 @@ COPY . .
 ARG staging
 RUN if [ -n "$staging" ] ; then npm run build:staging ; else npm run build ; fi
 
+# create logging directory and make it globally accessible
+RUN mkdir -p /var/log/nextjs_logs
+RUN chmod 777 /var/log/nextjs_logs
+
 # Expose port 3000
 EXPOSE 3000
 
