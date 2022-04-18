@@ -8,7 +8,7 @@ import {
   TokenMetadata,
   TokenTransfers,
 } from "@components/ui/token";
-import { BackButton } from "@components/ui/common";
+import { BackButton, Message } from "@components/ui/common";
 import Head from "next/head";
 
 export default function NFTToken({ previousUrl }) {
