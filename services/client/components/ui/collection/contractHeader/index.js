@@ -56,6 +56,7 @@ const ContractHeaderCard = ({
                     alt="Contract Image"
                     src={contractMetadata.image}
                     width="100%"
+                    className="rounded-full"
                     onLoad={() => setLoaded(true)}
                   />
                 </div>

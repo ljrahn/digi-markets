@@ -23,6 +23,7 @@ const PopularCollectionsItem = ({ contractData }) => {
             alt="Contract Image"
             src={contractData.image}
             width="100%"
+            className="rounded-full"
             onLoad={() => setLoaded(true)}
           />
         </div>

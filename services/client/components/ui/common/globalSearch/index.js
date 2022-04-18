@@ -88,7 +88,7 @@ const SearchCollection = ({ rotate = false }) => {
         style={{ width: inputRef.current?.offsetWidth }}
       >
         {focused &&
-          !contract_data.isLoading &&
+          !contract_data.isValidating &&
           text &&
           contract_data.data?.result.map((contract, index) => (
             <Link
@@ -127,7 +127,7 @@ const SearchCollection = ({ rotate = false }) => {
               </a>
             </Link>
           ))}
-        {focused && contract_data.isLoading && text && (
+        {focused && contract_data.isValidating && text && (
           <div className="py-3 px-4 mx-auto text-white text-sm">
             <Loader color="white" />
           </div>
