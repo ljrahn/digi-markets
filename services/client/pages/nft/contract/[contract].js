@@ -16,11 +16,11 @@ export default function NFTContract() {
   const router = useRouter();
   const { contract, page } = router.query;
 
-  MetadataPostFetcher(contract);
-
-  const { error: contractMetadataError } = useContractMetadata({
-    contractAddress: contract,
-  });
+  const {
+    data: contractMetadata,
+    isLoading: contractMetadataIsLoading,
+    error: contractMetadataError,
+  } = MetadataPostFetcher(contract);
 
   const {
     data: tokenListData,
@@ -38,7 +38,11 @@ export default function NFTContract() {
       </Head>
       <div className="my-8">
         <div className="mx-auto w-full lg:w-4/5">
-          <ContractHeaderCard />
+          <ContractHeaderCard
+            contractMetadata={contractMetadata}
+            contractMetadataIsValidating={contractMetadataIsLoading}
+            contractMetadataError={contractMetadataError}
+          />
         </div>
 
         <div className="mt-6">

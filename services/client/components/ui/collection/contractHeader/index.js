@@ -7,18 +7,16 @@ import { MdVerified } from "react-icons/md";
 import SearchToken from "../searchToken";
 import ContractHeaderSkeleton from "./contractHeaderSkeleton";
 
-const ContractHeaderCard = () => {
+const ContractHeaderCard = ({
+  contractMetadata,
+  contractMetadataIsValidating,
+  contractMetadataError,
+}) => {
   const router = useRouter();
   const { contract, page } = router.query;
   const [loaded, setLoaded] = useState(false);
   const [totalTokens, setTotalTokens] = useState(null);
   const [contractState, setContractState] = useState(null);
-
-  const {
-    data: contractMetadata,
-    isValidating: contractMetadataIsValidating,
-    error: contractMetadataError,
-  } = useContractMetadata({ contractAddress: contract });
 
   const {
     data: tokenListData,
