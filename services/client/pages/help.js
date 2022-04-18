@@ -81,8 +81,14 @@ export default function Help() {
                 enter the exact contract address for the NFT collection. From
                 there you can browse the different tokens for that NFT
                 collection, or enter the exact token ID for the token you wish
-                to view. Currently there is no marketplace feature to buy and
-                sell NFT&apos;s, but that will be coming soon, stay tuned!
+                to view.
+                <div className="my-4">
+                  Note that NFT response times, can widely vary depending on the
+                  server the token_uri is being fetched from, so some images and
+                  token_uri data may take a while to load.
+                </div>
+                Currently there is no marketplace feature to buy and sell
+                NFT&apos;s, but that will be coming soon, stay tuned!
               </p>
             </div>
           </div>

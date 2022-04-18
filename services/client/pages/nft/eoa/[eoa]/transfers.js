@@ -6,6 +6,7 @@ import { AccountTokenTransfers } from "@components/ui/accountAssets";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import { Message } from "@components/ui/common";
 
 export default function AccountNFTTransfers() {
   const router = useRouter();
@@ -59,30 +60,37 @@ export default function AccountNFTTransfers() {
                   !tokenTransferError &&
                   tokenTransferData && (
                     <>
-                      {tokenTransferData.total == 0 && (
-                        <div className="text-center text-2xl font-extrabold text-gray-600 mt-3">
-                          This account has 0 NFT Transactions
+                      {tokenTransferData.total == 0 ? (
+                        <div className="mt-5 text-lg">
+                          <Message type="warning">
+                            This account has 0 NFT Transactions
+                          </Message>
+                        </div>
+                      ) : (
+                        <div className="mt-10 w-full mx-auto">
+                          <AccountTokenTransfers
+                            tokenTransferData={tokenTransferData}
+                            tokenTransferIsValidating={
+                              tokenTransferIsValidating
+                            }
+                            tokenTransferError={tokenTransferError}
+                          />
                         </div>
                       )}
                     </>
                   )}
-                <div className="mt-10 w-full mx-auto">
-                  <AccountTokenTransfers
-                    tokenTransferData={tokenTransferData}
-                    tokenTransferIsValidating={tokenTransferIsValidating}
-                    tokenTransferError={tokenTransferError}
-                  />
-                </div>
               </>
             ) : (
-              <div className="text-center text-2xl font-extrabold text-gray-600 mt-3">
-                You must connect your wallet to view NFT&apos;s
+              <div className="mt-5 text-lg">
+                <Message type="warning">
+                  You must connect your wallet to view NFT&apos;s
+                </Message>
               </div>
             )}
           </>
         ) : (
-          <div className="text-center text-2xl font-extrabold text-gray-600 mt-3">
-            Error: {error}
+          <div className="mt-5 text-lg">
+            <Message type="danger">Error: {error}</Message>
           </div>
         )}
       </div>

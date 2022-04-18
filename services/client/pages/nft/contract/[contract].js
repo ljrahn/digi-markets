@@ -21,7 +21,6 @@ export default function NFTContract() {
   const { error: contractMetadataError } = useContractMetadata({
     contractAddress: contract,
   });
-  console.log(contractMetadataError);
 
   const {
     data: tokenListData,

@@ -2,7 +2,7 @@ import { useAccountNFT } from "@components/hooks/server";
 import { useAccount } from "@components/hooks/web3";
 import { AssetsHeader } from "@components/ui/accountAssets";
 import { TokenCard } from "@components/ui/collection";
-import { Breadcrumbs, Pagination } from "@components/ui/common";
+import { Breadcrumbs, Message, Pagination } from "@components/ui/common";
 import { BaseLayout } from "@components/ui/layout";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -57,8 +57,10 @@ export default function AccountNFT() {
                 {!tokenListIsValidating && !tokenListError && tokenListData && (
                   <>
                     {tokenListData.total == 0 && (
-                      <div className="text-center text-2xl font-extrabold text-gray-600 mt-3">
-                        This account has 0 NFT&apos;s
+                      <div className="mt-5 text-lg">
+                        <Message type="warning">
+                          This account has 0 NFT&apos;s
+                        </Message>
                       </div>
                     )}
                   </>
@@ -72,14 +74,16 @@ export default function AccountNFT() {
                 </div>
               </>
             ) : (
-              <div className="text-center text-2xl font-extrabold text-gray-600 mt-3">
-                You must connect your wallet to view NFT&apos;s
+              <div className="mt-5 text-lg">
+                <Message type="warning">
+                  You must connect your wallet to view NFT&apos;s
+                </Message>
               </div>
             )}
           </>
         ) : (
-          <div className="text-center text-2xl font-extrabold text-gray-600 mt-3">
-            Error: {error}
+          <div className="mt-5 text-lg">
+            <Message type="danger">Error: {error}</Message>
           </div>
         )}
       </div>

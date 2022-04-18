@@ -1,7 +1,7 @@
 import TokenCardItem from "./tokenCardItem";
 import TokenSkeleton from "./tokenSkeleton";
 import Link from "next/link";
-import { Pagination } from "@components/ui/common";
+import { Message, Pagination } from "@components/ui/common";
 
 export default function TokenCard({
   tokenListData,
@@ -40,8 +40,10 @@ export default function TokenCard({
           )}
         </>
       ) : (
-        <div className="text-center mt-12 text-2xl font-extrabold text-gray-600">
-          There was a problem loading the requested NFT Collection
+        <div className="mt-5 text-lg">
+          <Message type="warning">
+            There was a problem loading the requested NFT Collection
+          </Message>
         </div>
       )}
     </>

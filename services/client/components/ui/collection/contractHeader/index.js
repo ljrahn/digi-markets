@@ -1,5 +1,5 @@
 import { useContractMetadata, useTokenList } from "@components/hooks/server";
-import { CopyClipboard } from "@components/ui/common";
+import { CopyClipboard, Message } from "@components/ui/common";
 import { useRouter } from "next/router";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -119,8 +119,10 @@ const ContractHeaderCard = () => {
           )}
         </>
       ) : (
-        <div className="text-center mt-12 text-2xl font-extrabold text-gray-600">
-          There was a problem loading contract metadata
+        <div className="mt-5 text-lg">
+          <Message type="warning">
+            There was a problem loading contract metadata
+          </Message>
         </div>
       )}
     </>

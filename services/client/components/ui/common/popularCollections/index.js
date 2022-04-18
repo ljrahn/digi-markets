@@ -1,5 +1,6 @@
 import { useContractSearch, useNetworkData } from "@components/hooks/server";
 import Link from "next/link";
+import Message from "../message";
 import PopularCollectionsItem from "./popularCollectionsItem";
 import PopularCollectionsItemSkeleton from "./popularCollectionsItemSkeleton";
 
@@ -49,8 +50,10 @@ export default function PopularCollections() {
           </div>
         </>
       ) : (
-        <div className="text-center mt-12 text-2xl font-extrabold text-gray-600">
-          There was a problem loading the Popular Collections
+        <div className="mt-5 text-lg">
+          <Message type="warning">
+            There was a problem loading the Popular Collections
+          </Message>
         </div>
       )}
     </>

@@ -4,6 +4,7 @@ from .network import BlockchainNetworkListAPI, BlockchainNetworkAPI
 from .nft_account import NFTAccountAPI, NFTAccountTransfersAPI
 from .nft_contract import NFTContractSearchAPI, NFTContractMetadataAPI
 from .nft_token import NFTTokenAPI, NFTTokenTransfersAPI, NFTTokenListAPI
+from .token_uri import FetchTokenURIAPI
 import logging
 
 logger = logging.getLogger('src.resources')
@@ -24,6 +25,7 @@ api.add_resource(NFTContractSearchAPI, '/nft/contract/search')
 
 api.add_resource(BlockchainNetworkAPI, '/network/<int:chain_id>')
 api.add_resource(BlockchainNetworkListAPI, '/network')
+api.add_resource(FetchTokenURIAPI, '/token_uri')
 
 
 @api_bp.before_request

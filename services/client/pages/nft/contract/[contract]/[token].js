@@ -69,8 +69,10 @@ export default function NFTToken({ previousUrl }) {
                 </div>
               </>
             ) : (
-              <div className="text-center text-2xl font-extrabold text-gray-600">
-                There was a problem loading the requested NFT Token
+              <div className="mt-5 text-lg">
+                <Message type="warning">
+                  There was a problem loading the requested NFT Token
+                </Message>
               </div>
             )}
           </div>

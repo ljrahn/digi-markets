@@ -1,5 +1,5 @@
 import { useNetworkData } from "@components/hooks/server";
-import { Pagination } from "@components/ui/common";
+import { Message, Pagination } from "@components/ui/common";
 import React from "react";
 import TokenTransfersSkeleton from "./skeleton";
 import TokenTransferItem from "./tokenTransferItem";
@@ -75,8 +75,10 @@ const TokenTransfers = ({
           )}
         </>
       ) : (
-        <div className="text-center text-2xl font-extrabold text-gray-600">
-          There was a problem loading the requested NFT Token Transfers
+        <div className="mt-5 text-lg">
+          <Message type="warning">
+            There was a problem loading the requested NFT Token Transfers
+          </Message>
         </div>
       )}
     </>

@@ -1,3 +1,5 @@
+const SERVER_BASE_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
+
 export default class NFTMetaDataParser {
   constructor(item) {
     this.item = item;
@@ -14,14 +16,24 @@ export default class NFTMetaDataParser {
         this.item.token_uri.startsWith("https://")
       ) {
         // fetch the token uri
-        const res = await fetch(this.item.token_uri);
-        const data = await res.json();
+        let res;
+        let data;
+        try {
+          res = await fetch(this.item.token_uri);
+          data = await res.json();
+        } catch (err) {
+          res = await fetch(
+            `${SERVER_BASE_URL}/api/token_uri?request=${this.item.token_uri}`
+          );
+          data = await res.json();
+        }
+
         // check if token uri image is ipfs or http and set image src
         this.image_src = this.__parseImage(data);
         // If token uri is not http or https check if token uri is ipfs
       } else if (this.item.token_uri.startsWith("ipfs://")) {
         // And fetch ipfs token uri
-        tokenUri =
+        const tokenUri =
           "https://gateway.moralisipfs.com/ipfs/" +
           this.item.token_uri.split("ipfs://").pop();
         const res = await fetch(tokenUri);
@@ -45,13 +57,22 @@ export default class NFTMetaDataParser {
         this.item.token_uri.startsWith("https://")
       ) {
         // fetch the token uri
-        const res = await fetch(this.item.token_uri);
-        const data = await res.json();
+        let res;
+        let data;
+        try {
+          res = await fetch(this.item.token_uri);
+          data = await res.json();
+        } catch (err) {
+          res = await fetch(
+            `${SERVER_BASE_URL}/api/token_uri?request=${this.item.token_uri}`
+          );
+          data = await res.json();
+        }
         this.sorted_metadata = this.__parseMetadata(data);
         // If token uri is not http or https check if token uri is ipfs
       } else if (this.item.token_uri.startsWith("ipfs://")) {
         // And fetch ipfs token uri
-        tokenUri =
+        const tokenUri =
           "https://gateway.moralisipfs.com/ipfs/" +
           this.item.token_uri.split("ipfs://").pop();
         const res = await fetch(tokenUri);
