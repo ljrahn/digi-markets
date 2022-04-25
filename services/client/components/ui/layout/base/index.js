@@ -3,7 +3,6 @@ import { Web3Provider } from "@components/providers";
 import { ServerProvider } from "@components/providers";
 import { Navbar, Footer } from "@components/ui/common";
 import { Sidebar } from "@components/ui/common";
-import InteractiveDemoMenu from "@components/ui/help/interactiveDemoMenu";
 import { useState } from "react";
 
 export default function BaseLayout({ children }) {
@@ -15,11 +14,7 @@ export default function BaseLayout({ children }) {
         <ServerProvider>
           <Navbar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
           <Sidebar showSidebar={showSidebar} />
-          <div
-            className={`max-w-7xl mx-auto px-5 md:px-20 sm:px-10 ${
-              showSidebar ? `md:mr-20` : ``
-            }`}
-          >
+          <div className="max-w-7xl mx-auto px-5 md:px-20 sm:px-10">
             <div className="fit">{children}</div>
           </div>
           <Footer />
