@@ -42,6 +42,7 @@ class NFTTokenListSchema(Schema):
     total = fields.Integer()
     page = fields.Integer()
     page_size = fields.Integer()
+    cursor = fields.Str()
     result = fields.Nested(NFTTokenSchema, many=True)
 
     @pre_dump
@@ -86,6 +87,7 @@ class NFTTokenTransferListSchema(Schema):
     total = fields.Integer()
     page = fields.Integer()
     page_size = fields.Integer()
+    cursor = fields.Str()
     result = fields.Nested(NFTTokenTransferSchema, many=True)
 
     @pre_dump
@@ -125,6 +127,7 @@ class NFTContractListSchema(Schema):
     total = fields.Integer()
     page = fields.Integer()
     page_size = fields.Integer()
+    cursor = fields.Str()
     result = fields.Nested(NFTContractSchema, many=True)
 
     @pre_dump

@@ -19,7 +19,7 @@ class NetworkQueryParamsSchema(Schema):
     class Meta:
         strict = True
 
-    page = fields.Integer()
+    cursor = fields.Str()
     page_size = fields.Integer()
 
 
@@ -28,7 +28,7 @@ class NFTQueryParamsSchema(Schema):
         strict = True
 
     chain = fields.Str()
-    page = fields.Integer()
+    cursor = fields.Str()
     page_size = fields.Integer()
 
 

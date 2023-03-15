@@ -5,14 +5,14 @@ const SERVER_BASE_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
 
 export const handler =
   () =>
-  ({ contractAddress, page, pageSize }) => {
+  ({ contractAddress, cursor, pageSize }) => {
     const { networkData, isLoading: networkIsLoading } = useNetworkData();
 
     const chain = networkData ? networkData.short_name : "eth";
-    const url = `${SERVER_BASE_URL}/api/nft/contract/${contractAddress}?chain=${chain}&page=${page}&page_size=${pageSize}`;
+    const url = `${SERVER_BASE_URL}/api/nft/contract/${contractAddress}?chain=${chain}&cursor=${cursor}&page_size=${pageSize}`;
 
     const { data, ...rest } = useSWRImmutable(
-      contractAddress && page && networkData && !networkIsLoading ? url : null,
+      contractAddress && networkData && !networkIsLoading ? url : null,
       async () => {
         const res = await fetch(url);
         if (!res.ok) {

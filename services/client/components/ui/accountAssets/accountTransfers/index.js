@@ -12,6 +12,9 @@ const AccountTokenTransfers = ({
   tokenTransferData,
   tokenTransferIsValidating,
   tokenTransferError,
+  cursors,
+  setCursors,
+  setPage,
 }) => {
   const router = useRouter();
   const { contract, token, page } = router.query;
@@ -79,11 +82,10 @@ const AccountTokenTransfers = ({
                 </div>
 
                 <Pagination
-                  total={tokenTransferData.total}
-                  page={tokenTransferData.page}
-                  numResults={tokenTransferData.num_results}
-                  pageSize={tokenTransferData.page_size}
-                  scroll={false}
+                  data={tokenTransferData}
+                  cursors={cursors}
+                  setCursors={setCursors}
+                  setPage={setPage}
                   color="white"
                 />
               </div>

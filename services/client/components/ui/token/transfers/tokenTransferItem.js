@@ -9,7 +9,6 @@ const TokenTransferItem = ({ item, networkData }) => {
   const { web3 } = useWeb3();
   const time = new Date(item.block_timestamp);
   const [value, setValue] = useState(0);
-  console.log(item.value);
 
   useEffect(() => {
     if (item.value != null && item.value != undefined) {

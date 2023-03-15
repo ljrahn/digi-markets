@@ -2,60 +2,34 @@ import Router, { useRouter } from "next/router";
 import React from "react";
 import { CgArrowRight, CgArrowLeft } from "react-icons/cg";
 import { useEffect } from "react";
+import { useState } from "react";
 
-const Pagination = ({
-  total,
-  page,
-  numResults,
-  pageSize,
-  color = "dark",
-  scroll = true,
-}) => {
-  const router = useRouter();
-  const lowerLimit = (page - 1) * pageSize + 1;
-  const upperLimit = lowerLimit + numResults - 1;
-
-  useEffect(() => {
-    // If page number is manually specified, and results dont exist for that page, redirect to page 1
-    if (numResults <= 0 || page <= 0) {
-      router.push(
-        {
-          pathname: router.pathname,
-          query: { ...router.query, page: 1 },
-        },
-        undefined,
-        { scroll: scroll }
-      );
-    }
-  }, []);
+const Pagination = ({ data, cursors, setCursors, setPage, color = "dark" }) => {
+  const lowerLimit = (data.page - 1) * data.page_size + 1;
+  const upperLimit = lowerLimit + data.num_results - 1;
 
   const onClick = (direction) => {
-    const page = null;
-    const current_page = router.query.page;
-    if (direction == "next") {
-      page = parseInt(current_page) + 1;
-    } else if (direction == "prev") {
-      page = parseInt(current_page) - 1;
-    }
-    page = !page && !(page <= 0) ? 2 : page; // if page not specified redirect to page 2
+    if (direction == "next" && !(upperLimit >= data.total)) {
+      const newPage = data.page + 1;
+      if (newPage > cursors.length && data.cursor != null) {
+        setCursors([...cursors, data.cursor]);
+      }
 
-    // Disable prev if page is going to be equal to 0
-    // Disable next if the upper limit is equal to or greater than total
-    if (!(page <= 0) && !(upperLimit >= total && direction == "next")) {
-      router.push(
-        {
-          pathname: router.pathname,
-          query: { ...router.query, page: page },
-        },
-        undefined,
-        { scroll: scroll }
-      );
+      if (data.cursor != null) {
+        setPage(newPage);
+      }
+    } else if (direction == "prev") {
+      const newPage = data.page - 1;
+
+      if (!(newPage <= 0)) {
+        setPage(newPage);
+      }
     }
   };
 
   return (
     <>
-      {total != 0 && (
+      {data.total != 0 && (
         <div className="flex flex-col items-center">
           <span
             className={`text-md ${
@@ -84,7 +58,7 @@ const Pagination = ({
                 color == "dark" ? "text-gray-600" : "text-gray-100"
               }`}
             >
-              {total.toLocaleString()}
+              {data.total.toLocaleString()}
             </span>{" "}
             Entries
           </span>

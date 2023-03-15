@@ -108,7 +108,7 @@ export default function Help() {
                 This is an open source project created by{" "}
                 <span>
                   <a
-                    href="https://github.com/lucasrahn09"
+                    href="https://github.com/ljrahn"
                     className="text-blue-500 hover:text-blue-700"
                     target="_blank"
                     rel="noreferrer"
@@ -119,12 +119,12 @@ export default function Help() {
                 . If you would like to contribute, head over to the github page{" "}
                 <span>
                   <a
-                    href="https://github.com/lucasrahn09/digi-markets"
+                    href="https://github.com/ljrahn/digi-markets"
                     target="_blank"
                     rel="noreferrer"
                     className="text-blue-500 hover:text-blue-700"
                   >
-                    lucasrahn09/digi-markets
+                    ljrahn/digi-markets
                   </a>
                 </span>{" "}
                 and make a pull request, or if you would like to fire up your

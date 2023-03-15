@@ -63,7 +63,7 @@ const Navbar = ({ showSidebar, setShowSidebar }) => {
                 Home
               </a>
             </Link>
-            <Link href={`/nft/eoa/${accountData}?page=1`}>
+            <Link href={`/nft/eoa/${accountData}`}>
               <a
                 className={`font-medium mx-2 lg:mx-3 relative ${
                   demoStarted ? "pointer-events-none" : ""
@@ -146,7 +146,7 @@ const Navbar = ({ showSidebar, setShowSidebar }) => {
             Home
           </a>
         </Link>
-        <Link href={`/nft/eoa/${accountData}?page=1`}>
+        <Link href={`/nft/eoa/${accountData}`}>
           <a
             className={`my-1 font-medium mr-4 relative ${
               demoStarted ? "pointer-events-none" : ""

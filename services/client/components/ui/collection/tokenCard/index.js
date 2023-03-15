@@ -7,6 +7,9 @@ export default function TokenCard({
   tokenListData,
   tokenListIsValidating,
   tokenListError,
+  cursors,
+  setCursors,
+  setPage,
 }) {
   return (
     <>
@@ -31,10 +34,10 @@ export default function TokenCard({
           {!tokenListIsValidating && tokenListData && (
             <div className="mt-10">
               <Pagination
-                total={tokenListData.total}
-                numResults={tokenListData.num_results}
-                page={tokenListData.page}
-                pageSize={tokenListData.page_size}
+                data={tokenListData}
+                cursors={cursors}
+                setCursors={setCursors}
+                setPage={setPage}
               />
             </div>
           )}

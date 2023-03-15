@@ -12,7 +12,7 @@ logger = logging.getLogger('src.resources.network')
 
 def get_options():
     options = dict()
-    options['page'] = request.args.get('page', 1)
+    options['cursor'] = request.args.get('cursor', '')
     options['page_size'] = request.args.get('page_size', 100)
 
     errors = network_query_params_schema.validate(options)

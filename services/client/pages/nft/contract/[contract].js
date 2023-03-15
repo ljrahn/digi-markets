@@ -11,10 +11,13 @@ import React from "react";
 
 import MetadataPostFetcher from "@utils/metadataPostFetcher";
 import Head from "next/head";
+import { useState } from "react";
 
 export default function NFTContract() {
   const router = useRouter();
-  const { contract, page } = router.query;
+  const [cursors, setCursors] = useState([""]);
+  const [page, setPage] = useState(1);
+  const { contract } = router.query;
 
   const {
     data: contractMetadata,
@@ -28,7 +31,7 @@ export default function NFTContract() {
     isValidating: tokenListIsValidating,
   } = useTokenList({
     contractAddress: contract,
-    page: page,
+    cursor: cursors[page - 1],
   });
 
   return (
@@ -50,6 +53,9 @@ export default function NFTContract() {
             tokenListData={tokenListData}
             tokenListIsValidating={tokenListIsValidating}
             tokenListError={tokenListError}
+            setCursors={setCursors}
+            cursors={cursors}
+            setPage={setPage}
           />
         </div>
       </div>

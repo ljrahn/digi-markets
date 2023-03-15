@@ -11,12 +11,14 @@ class MoralisApi:
     """
     Moralis API class for fetching data from Moralis HTTP API
     """
-    def __init__(self, chain: str = 'eth', page: int = 1, page_size: int = 100):
+
+    def __init__(self, chain: str = 'eth', cursor: str = '', page_size: int = 100, disable_total: str ='false'):
         self.__base_url = app.config['MORALIS_BASE_URL']
         self.__api_key = app.config["MORALIS_API_KEY"]
         self.chain = chain
-        self.page = page
+        self.cursor = cursor
         self.page_size = page_size
+        self.disable_total = disable_total
 
     @property
     def options(self):
@@ -25,11 +27,15 @@ class MoralisApi:
             options['chain'] = self.chain
         if self.page_size is not None:
             options['limit'] = self.page_size
-        if self.page is not None:
-            options['offset'] = self.page_size*(self.page-1)
+        if self.cursor != '':
+            options['cursor'] = self.cursor
+        if self.disable_total is not None:
+            options['disable_total'] = self.disable_total
         return options
 
     def __get(self, endpoint: str) -> dict:
+        logger.info(urlencode(self.options))
+        logger.info(f'{self.__base_url}{endpoint}?{urlencode(self.options)}')
 
         r = requests.get(f'{self.__base_url}{endpoint}?{urlencode(self.options)}', headers={
                          'Content-Type': 'application/json', 'X-API-Key': self.__api_key})

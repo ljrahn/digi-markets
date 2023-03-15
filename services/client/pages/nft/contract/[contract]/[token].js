@@ -14,7 +14,9 @@ import Head from "next/head";
 export default function NFTToken({ previousUrl }) {
   const router = useRouter();
   const [goBackUrl, setGoBackUrl] = useState(null);
-  const { contract, token, page } = router.query;
+  const { contract, token } = router.query;
+  const [cursors, setCursors] = useState([""]);
+  const [page, setPage] = useState(1);
 
   const {
     data: tokenData,
@@ -29,7 +31,7 @@ export default function NFTToken({ previousUrl }) {
   } = useTokenTransfers({
     contractAddress: contract,
     tokenId: token,
-    page: page,
+    cursor: cursors[page - 1],
   });
 
   useEffect(() => {
@@ -82,6 +84,9 @@ export default function NFTToken({ previousUrl }) {
               tokenTransferData={tokenTransferData}
               tokenTransferIsValidating={tokenTransferIsValidating}
               tokenTransferError={tokenTransferError}
+              setCursors={setCursors}
+              cursors={cursors}
+              setPage={setPage}
             />
           </div>
         </>

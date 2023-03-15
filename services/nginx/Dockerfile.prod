@@ -2,8 +2,8 @@ FROM nginx
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY prod.conf /etc/nginx/conf.d/nginx.conf
-COPY certs/lujr_ca.key/ /etc/ssl/private/key.key
-COPY certs/lujr_ca.crt/ /etc/ssl/certs/cert.crt
+COPY certs/ljrahn_ca.key/ /etc/ssl/private/key.key
+COPY certs/ljrahn_ca.crt/ /etc/ssl/certs/cert.crt
 
 EXPOSE 443
 EXPOSE 80

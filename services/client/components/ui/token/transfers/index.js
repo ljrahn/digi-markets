@@ -8,6 +8,9 @@ const TokenTransfers = ({
   tokenTransferData,
   tokenTransferIsValidating,
   tokenTransferError,
+  cursors,
+  setCursors,
+  setPage,
 }) => {
   const { networkData, isLoading: networkIsLoading } = useNetworkData();
 
@@ -61,11 +64,10 @@ const TokenTransfers = ({
                 </div>
 
                 <Pagination
-                  total={tokenTransferData.total}
-                  page={tokenTransferData.page}
-                  numResults={tokenTransferData.num_results}
-                  pageSize={tokenTransferData.page_size}
-                  scroll={false}
+                  data={tokenTransferData}
+                  cursors={cursors}
+                  setCursors={setCursors}
+                  setPage={setPage}
                   color="white"
                 />
               </div>

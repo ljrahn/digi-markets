@@ -13,14 +13,17 @@ export default function AccountNFT() {
   const { account } = useAccount();
   const accountData = account.data;
   const [error, setError] = useState(null);
-  const { eoa, page } = router.query;
+  const [cursors, setCursors] = useState([""]);
+  const [page, setPage] = useState(1);
+  const { eoa } = router.query;
+
   const {
     data: tokenListData,
     error: tokenListError,
     isValidating: tokenListIsValidating,
   } = useAccountNFT({
     accountAddress: eoa != "undefined" && eoa ? eoa : null,
-    page: page,
+    cursor: cursors[page - 1],
   });
 
   useEffect(() => {
@@ -70,6 +73,9 @@ export default function AccountNFT() {
                     tokenListData={tokenListData}
                     tokenListIsValidating={tokenListIsValidating}
                     tokenListError={tokenListError}
+                    setCursors={setCursors}
+                    cursors={cursors}
+                    setPage={setPage}
                   />
                 </div>
               </>

@@ -49,7 +49,6 @@ export default class NFTMetaDataParser {
   }
 
   async getSortedMetadata() {
-    console.log(this.item.token_uri);
     // Check item has token_uri
     if (this.item.token_uri) {
       // Then check if token uri is http or https

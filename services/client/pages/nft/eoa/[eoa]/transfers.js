@@ -13,14 +13,16 @@ export default function AccountNFTTransfers() {
   const { account } = useAccount();
   const [error, setError] = useState(null);
   const accountData = account.data;
-  const { eoa, page } = router.query;
+  const [cursors, setCursors] = useState([""]);
+  const [page, setPage] = useState(1);
+  const { eoa } = router.query;
   const {
     data: tokenTransferData,
     error: tokenTransferError,
     isValidating: tokenTransferIsValidating,
   } = useAccountNFTTransfers({
     accountAddress: eoa != "undefined" && eoa ? eoa : null,
-    page: page,
+    cursor: cursors[page - 1],
     pageSize: 8,
   });
 
@@ -74,6 +76,9 @@ export default function AccountNFTTransfers() {
                               tokenTransferIsValidating
                             }
                             tokenTransferError={tokenTransferError}
+                            setCursors={setCursors}
+                            cursors={cursors}
+                            setPage={setPage}
                           />
                         </div>
                       )}

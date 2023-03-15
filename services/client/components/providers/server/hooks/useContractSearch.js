@@ -3,21 +3,21 @@ import useSWRImmutable from "swr/immutable";
 
 const SERVER_BASE_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
 
-const serverFetcher = async ({ text, chain, page, pageSize }) => {
-  const res = await fetch(
-    `${SERVER_BASE_URL}/api/nft/contract/search?q=${text}&filter=name,symbol&chain=${chain}&page=${page}&page_size=${pageSize}`
-  );
+// const serverFetcher = async ({ text, chain, page, pageSize }) => {
+//   const res = await fetch(
+//     `${SERVER_BASE_URL}/api/nft/contract/search?q=${text}&filter=name,symbol&chain=${chain}&page=${page}&page_size=${pageSize}`
+//   );
 
-  if (!res.ok) {
-    const error = new Error(
-      `Error occured while querying the Server API: ${res.status}`
-    );
-    error.info = await res.json();
-    error.status = res.status;
-    throw error;
-  }
-  return await res.json();
-};
+//   if (!res.ok) {
+//     const error = new Error(
+//       `Error occured while querying the Server API: ${res.status}`
+//     );
+//     error.info = await res.json();
+//     error.status = res.status;
+//     throw error;
+//   }
+//   return await res.json();
+// };
 
 export const handler =
   () =>

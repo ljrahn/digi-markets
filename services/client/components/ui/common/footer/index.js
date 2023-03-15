@@ -49,7 +49,7 @@ export default function Footer() {
                 Home
               </a>
             </Link>
-            <Link href={`/nft/eoa/${account.data}?page=1`}>
+            <Link href={`/nft/eoa/${account.data}`}>
               <a
                 className={`
               ${

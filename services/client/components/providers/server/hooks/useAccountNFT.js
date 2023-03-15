@@ -6,7 +6,7 @@ const SERVER_BASE_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
 
 export const handler =
   () =>
-  ({ accountAddress, page, pageSize }) => {
+  ({ accountAddress, cursor, pageSize }) => {
     const { account } = useAccount();
     const {
       networkData,
@@ -15,9 +15,9 @@ export const handler =
     } = useNetworkData();
 
     const chain = networkData ? networkData.short_name : "eth";
-    const url = `${SERVER_BASE_URL}/api/nft/eoa/${accountAddress}?chain=${chain}&page=${page}&page_size=${pageSize}`;
+    const url = `${SERVER_BASE_URL}/api/nft/eoa/${accountAddress}?chain=${chain}&cursor=${cursor}&page_size=${pageSize}`;
     const { data, ...rest } = useSWRImmutable(
-      accountAddress && page && networkData && !networkIsLoading ? url : null,
+      accountAddress && networkData && !networkIsLoading ? url : null,
       async () => {
         const res = await fetch(url);
         if (!res.ok) {

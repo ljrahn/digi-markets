@@ -16,7 +16,7 @@ def get_options(list=False):
     options['chain'] = request.args.get('chain', 'eth')
 
     if list:
-        options['page'] = request.args.get('page', 1)
+        options['cursor'] = request.args.get('cursor', '')
         options['page_size'] = request.args.get('page_size', 100)
 
     errors = nft_query_params_schema.validate(options)
@@ -56,8 +56,7 @@ class NFTTokenListAPI(Resource):
         options = get_options(list=True)
 
         moralis_api = MoralisApi(
-            chain=options['chain'], page=options['page'], page_size=options['page_size'])
-
+            chain=options['chain'], cursor=options['cursor'], page_size=options['page_size'])
         response, status_code = moralis_api.get_nft_token_list(address)
         if status_code >= 300:
             abort(status_code, response)
@@ -134,7 +133,7 @@ class NFTTokenTransfersAPI(Resource):
         options = get_options(list=True)
 
         moralis_api = MoralisApi(
-            chain=options['chain'], page=options['page'], page_size=options['page_size'])
+            chain=options['chain'], cursor=options['cursor'], page_size=options['page_size'])
 
         response, status_code = moralis_api.get_nft_token_transfers(
             address, token_id)

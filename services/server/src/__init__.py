@@ -61,6 +61,7 @@ def create_app():
             r"/api/*": {"origins": "https://digimarkets.lujr.ca"}})
     else:
         cors.init_app(app)
+
     bootstrap.init_app(app)
     csrf.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView(

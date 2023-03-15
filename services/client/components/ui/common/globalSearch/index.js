@@ -43,7 +43,6 @@ const SearchCollection = ({ rotate = false }) => {
       if (text.startsWith("0x")) {
         router.push({
           pathname: `/nft/contract/${text}`,
-          query: { page: 1 },
         });
         setInputBlank();
       }
@@ -95,7 +94,6 @@ const SearchCollection = ({ rotate = false }) => {
               key={index}
               href={{
                 pathname: `/nft/contract/${contract.contract_address}`,
-                query: { page: 1 },
               }}
             >
               <a onClick={setInputBlank}>
