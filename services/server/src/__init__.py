@@ -47,6 +47,7 @@ def create_app():
 
     # Log Setup
     setup_logging(app)
+    app.logger.info(app.config)
     app.logger.info('Application starting!')
 
     # Initilize modules
